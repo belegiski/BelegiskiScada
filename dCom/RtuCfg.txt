@@ -1,0 +1,7 @@
+STA 28
+TCP 62958
+
+
+DO_REG  6 2200   0  0      1     0  DO  @DigOut 2
+IN_REG  3 2300  0  0   4095  2000  AI  @AnaIn 4
+HR_INT  2 4500  0  0   4095  1200  AO  @AnaOut 4
