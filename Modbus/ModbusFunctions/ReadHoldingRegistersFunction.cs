@@ -32,6 +32,8 @@ namespace Modbus.ModbusFunctions
             Buffer.BlockCopy(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)ModbusRead.Length)), 0, request, 4, 2);
             request[6] = ModbusRead.UnitId;
             request[7] = ModbusRead.FunctionCode;
+            Buffer.BlockCopy(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)ModbusRead.StartAddress)), 0, request, 8, 2);
+            Buffer.BlockCopy(BitConverter.GetBytes(IPAddress.HostToNetworkOrder((short)ModbusRead.Quantity)), 0, request, 10, 2);
             return request;
         }
 
@@ -50,7 +52,6 @@ namespace Modbus.ModbusFunctions
             {
                 byte second_byte = response[byte02_start += 2];
                 byte first_byte = response[byte01_start += 2];
-
                 value = (ushort)(first_byte + (second_byte << 8));
 
 
